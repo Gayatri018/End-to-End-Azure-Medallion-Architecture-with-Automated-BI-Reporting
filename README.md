@@ -60,14 +60,6 @@ This project bridges that gap by architecting a scalable **hybrid-cloud data eco
 
 The infrastructure adopts a highly resilient modern data warehouse design, moving fluidly through specialized layers:
 
-```
-[On-Premises SQL / ERP] -> [ADF Orchestration] -> [ADLS Gen2 Landing Raw] 
-               -> [Databricks Bronze (Ingest)] 
-               -> [Databricks Silver (Cleanse/Enrich)] 
-               -> [Databricks Gold (Aggregate/Dim-Fact)] 
-               -> [Azure Synapse Analytics EDW] -> [Power BI Interactive UI]
-```
-
 ### 🧱 System Architecture Blueprint
 The following diagrams represent the technical blueprints implemented across the workspace:
 
