@@ -99,8 +99,7 @@ Key Entities Ingested:
 * **Gold Curated Zone:** Aggregates records, builds star schema entities, and structures final business metrics ready for executive analytical consumption.
 
 ### Phase 3: Enterprise Data Warehousing (Synapse Analytics)
-* The system loads curated Gold metrics efficiently into **Azure Synapse Analytics Dedicated SQL Pools** using optimized distributed PolyBase or COPY statement methods.
-* Enforces primary/foreign constraint abstractions and indexing models (e.g., Clustered Columnstore) to supercharge query execution times for large datasets.
+* The system loads curated Gold metrics efficiently into **Azure Synapse Analytics Serverless SQL Pools**.
 
 ### Phase 4: Business Intelligence & Analytics (Power BI)
 * Connects directly to Azure Synapse serverless/dedicated endpoints.
