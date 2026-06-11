@@ -25,7 +25,7 @@ The system implements a robust **Medallion Architecture** pattern to ingest, sta
 The end-to-end data platform decouples storage layers from elastic compute resource pools to maximize cost efficiency and scalability limits:
 
 <p align="center">
-  <img src="solution_architecture.png" alt="End-to-End Azure Data Platform Architecture" width="100%">
+  <img src="Architecture/solution_architecture.png" alt="End-to-End Azure Data Platform Architecture" width="100%">
 </p>
 
 ### Operational Component Breakdown
