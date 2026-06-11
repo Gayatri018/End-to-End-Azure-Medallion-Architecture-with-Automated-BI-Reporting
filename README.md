@@ -1,81 +1,125 @@
-# End-to-End Azure Data Engineering Platform
-### Enterprise-Grade Data Platform Utilizing Medallion Architecture, Azure Databricks, Synapse Analytics, and Power BI
+# End-to-End Azure Data Engineering & Analytics Platform
 
-[![Azure Data Factory](https://img.shields.io/badge/Azure-Data%20Factory-Blue?logo=microsoftazure&style=flat-square)](https://azure.microsoft.com/en-us/products/data-factory/)
-[![Azure Databricks](https://img.shields.io/badge/Azure-Databricks-Red?logo=databricks&style=flat-square)](https://azure.microsoft.com/en-us/products/databricks/)
-[![Azure Synapse](https://img.shields.io/badge/Azure-Synapse%20Analytics-blueviolet?logo=microsoftazure&style=flat-square)](https://azure.microsoft.com/en-us/products/synapse-analytics/)
-[![Power BI](https://img.shields.io/badge/Power%20BI-Data%20Visualization-yellow?logo=powerbi&style=flat-square)](https://powerbi.microsoft.com/)
+[![Azure](https://img.shields.io/badge/Azure-Cloud-blue?logo=microsoft-azure&style=flat-square)](https://azure.microsoft.com/)
+[![Azure Data Factory](https://img.shields.io/badge/Azure-Data%20Factory-blue?logo=microsoft-azure&style=flat-square)](https://azure.microsoft.com/services/data-factory/)
+[![Azure Synapse](https://img.shields.io/badge/Azure-Synapse%20Analytics-blue?logo=microsoft-azure&style=flat-square)](https://azure.microsoft.com/services/synapse-analytics/)
+[![Databricks](https://img.shields.io/badge/Databricks-PySpark-red?logo=databricks&style=flat-square)](https://www.databricks.com/)
+[![Python](https://img.shields.io/badge/Python-3.9+-yellow?logo=python&style=flat-square)](https://www.python.org/)
+[![Git](https://img.shields.io/badge/Git-CI%2FCD-green?logo=git&style=flat-square)](https://git-scm.com/)
 
----
-
-## 📋 Executive Summary
-This repository contains the production-ready infrastructure, control-flow orchestration, and transformation assets for an enterprise-scale **Cloud Data Platform**.
-
-The system implements a robust **Medallion Architecture** pattern to ingest, standardize, and systematically model data sourced from legacy on-premises transactional databases and enterprise resource files. By migrating raw transactional entities into a structured, unified analytical warehouse tier, the platform enables executive stakeholder layers to perform sub-second, interactive reporting within optimized Power BI dashboards.
-
-### Key Engineering Highlights
-* **Dynamic, Metadata-Driven Orchestration:** Eradicated pipeline hardcoding by constructing an abstract, parameterized ingestion framework inside Azure Data Factory (ADF) utilizing `Lookup` and sequential `ForEach` loops to process multiple core entities concurrently.
-* **Decoupled Lakehouse Transfomations:** Leveraged PySpark optimization engines within Azure Databricks to handle data cleaning, relational data type parsing, deduplication, and atomic schema evolution tracking.
-* **Enterprise Security Guardrails:** Designed with a zero-trust mindset—centralizing all infrastructure connection strings, database tokens, and master passwords within **Azure Key Vault** utilizing implicit system-assigned **Managed Identities (MSI)**.
+An enterprise-grade, end-to-end cloud data pipeline and analytical solution built on Microsoft Azure. This project implements a fully automated **Medallion Architecture** that extracts relational data from an on-premises ecosystem, processes it through structured validation tiers using **PySpark (Azure Databricks)**, warehouses the analytical models in **Azure Synapse Analytics**, and presents deep business insights via an interactive **Power BI** KPI dashboard.
 
 ---
 
-## 🏗️ Technical Architecture & Data Infrastructure
-
-The end-to-end data platform decouples storage layers from elastic compute resource pools to maximize cost efficiency and scalability limits:
-
-<p align="center">
-  <img src="Architecture/solution_architecture.png" alt="End-to-End Azure Data Platform Architecture" width="100%">
-</p>
-
-### Operational Component Breakdown
-
-1. **Enterprise Data Sources:** Transactional databases (On-Premises SQL Server) and peripheral ERP file arrays tracking vital customer, product, and sales cycles.
-2. **Orchestration Layer (Azure Data Factory):** Acts as the centralized scheduling and compute runtime coordinator, executing automated batch extraction windows seamlessly.
-3. **Landing & Lake Storage (ADLS Gen2):** Hierarchical cloud object store configuring an append-only, immutable landing tier for data assets.
-4. **Data Transformation Compute (Azure Databricks):** Orchestrates the phased transformation engine:
-   * **Bronze Layer:** Retains raw, untouched transactional data history for point-in-time state reconstruction.
-   * **Silver Layer:** Standardizes naming syntax, casts schema structures, resolves structural null states, and deduplicates historical deltas.
-   * **Gold Layer:** Builds aggregated KPI tracking, calculates analytical margins, and maps data assets onto optimized analytical Star Schemas.
-5. **Enterprise Data Warehouse (Azure Synapse Analytics):** Hosts a Dedicated SQL Pool running Massively Parallel Processing (MPP) architectures to serve curated golden semantic data products.
-6. **Business Intelligence (Power BI Enterprise):** Direct semantic structures pulling analytical views to serve cross-department analytical dashboards.
+## 📑 Table of Contents
+- [📌 Project Overview](#-project-overview)
+- [🎯 Business Objectives](#-business-objectives)
+- [🛠️ Tools & Technologies](#️-tools--technologies)
+- [📐 Data Platform & Solution Architecture](#-data-platform--solution-architecture)
+- [📂 Relational Data Model (Source)](#-relational-data-model-source)
+- [⚙️ Step-by-Step Pipeline Implementation](#️-step-by-step-implementation)
+  - [Phase 1: Secure Ingestion & Orchestration (ADF)](#phase-1-secure-ingestion--orchestration-adf)
+  - Phase 2: Multi-Stage Data Processing (Databricks Notebooks)
+  - Phase 3: Enterprise Data Warehousing (Synapse Analytics)
+  - Phase 4: Business Intelligence & Analytics (Power BI)
+- [⭐ Data Warehouse Design](#-star-schema-data-warehouse-design)
+- [💼 Dual-Role Impact: DE & DA Strengths](#-dual-role-impact-de--da-strengths)
+- [📜 License](#-license)
 
 ---
 
-## 🗄️ Relational Database Entity Model (Source Layer)
+## 📌 Project Overview
 
-The source system relies on a normalization pattern spanning multi-table dependencies across sales, address matrixing, and detailed inventory hierarchies:
+Organizations often face architectural siloing, resulting in a gap in understanding demographic behavior—specifically how traits like gender distribution correlate with regional and product category performance. 
 
-<p align="center">
-  <img src="dataModel/data_model.png" alt="Source Relational Entity Diagram" width="85%">
-</p>
-
-### Key Relational Components Transformed:
-* **Core Transaction Tables:** Transaction loops track through `SalesOrderHeader` and nested `SalesOrderDetail` tables referencing core billing lines.
-* **Customer Dimensions:** Normalizes enterprise identifiers across `Customer`, `Address`, and intermediary `CustomerAddress` relationship models.
-* **Product Catalog Graphing:** Relates discrete storage parameters through recursive hierarchies spanning `Product`, `ProductCategory`, `ProductModel`, and localized `ProductDescription` mappings.
+This project bridges that gap by architecting a scalable **hybrid-cloud data ecosystem**. By extracting complex relational tables from an on-premises legacy environment into an automated Azure-native pipeline, raw data is systematically transformed into a robust dimensional model. The result is a unified platform satisfying both **Data Engineering (scalability, automation, governance)** and **Data Analytics (actionable KPIs, responsive reporting)** paradigms.
 
 ---
 
-## 🚀 Ingestion & Transformation Pipeline Implementation
+## 🎯 Business Objectives
 
-### 1. Control-Flow Parameterization
-The core ingestion pipeline (`copy-all-data`) queries an isolated catalog mapping table to compute target path distributions and handle system data drift dynamically:
+* **KPI-Driven Dashboard:** Build a high-performance business dashboard reporting total items sold, gross sales revenue, and regional performance.
+* **Demographic Segmentation:** Isolate customer acquisition and purchase behaviors broken down by gender across disparate product categories.
+* **Interactive Slicing & Drilling:** Enable executives to seamlessly filter records down by temporal parameters (date ranges), product hierarchies, and customer demographics.
+* **Automated Refreshes:** Schedule a daily orchestrated workflow to pull delta loads or snapshot changes, ensuring stakeholders always operate on accurate, real-time-adjacent data.
 
-<p align="center">
-  <img src="Architecture/data_flow.png" alt="Azure Data Factory Ingestion Logic" width="100%">
-</p>
+---
 
-* **`Lookup1` Activity:** Queries the dynamic configuration register containing valid target data boundaries, active table primary keys, and storage paths.
-* **`ForEach1` Activity:** Spawns parallel batch worker processes to stream incoming parameters concurrently without linear thread locking.
-* **`Copy data1` Activity:** An internal parameterized streaming block mapping relational database sources straight into partitioned raw storage folders.
+## 🛠️ Tools & Technologies
 
-### 2. Multi-Tier Medallion Pipeline Automation
-Following a successful landing trigger, ADF initiates multi-stage notebook processes over active Spark clusters to advance the data's maturity state:
+* **Orchestration / Ingestion:** Azure Data Factory (ADF) utilizing self-hosted and cloud integration runtimes.
+* **Data Lakehouse Landing Zone:** Azure Data Lake Storage Gen2 (ADLS Gen2) structured with hierarchical namespaces.
+* **Big Data Computation / Transformation:** Azure Databricks Spark clusters executing optimized Python/PySpark scripts.
+* **Enterprise Data Warehouse (EDW):** Azure Synapse Analytics utilizing dedicated Synapse SQL pools for serving curated gold schemas.
+* **Business Intelligence Reporting:** Power BI Desktop/Service executing DAX queries on imported/DirectQuery analytical models.
+* **Security & Cloud Governance:** Microsoft Entra ID (RBAC), Azure Key Vault (Secret Scoping & Cryptographic String Management).
 
-<p align="center">
-  <img src="Architecture/medallion_architecture.png" alt="Azure Databricks Automated Notebook Pipeline" width="100%">
-</p>
+---
 
-* **`Bronze to Silver` Notebook:** Executes automated structural column validations, handles broken character sequences, converts datatypes to proper unified formats, and generates clean delta storage records.
-* **`Silver to Gold` Notebook:** Merges complex transactional entity boundaries (e.g., matching tracking orders directly to customer models) to establish high-performance analytical star schemas.
+## 📐 Data Platform & Solution Architecture
+
+The infrastructure adopts a highly resilient modern data warehouse design, moving fluidly through specialized layers:
+
+```
+[On-Premises SQL / ERP] -> [ADF Orchestration] -> [ADLS Gen2 Landing Raw] 
+               -> [Databricks Bronze (Ingest)] 
+               -> [Databricks Silver (Cleanse/Enrich)] 
+               -> [Databricks Gold (Aggregate/Dim-Fact)] 
+               -> [Azure Synapse Analytics EDW] -> [Power BI Interactive UI]
+```
+
+### 🧱 System Architecture Blueprint
+The following diagrams represent the technical blueprints implemented across the workspace:
+
+#### 1. End-to-End Core Infrastructure
+![Solution Architecture](Architecture/solution_architecture.png)
+
+#### 2. Multi-Tier Medallion Execution Lifecycle
+![Medallion Architecture Pipeline](Architecture/medallion_architecture.png)
+
+---
+
+## 📂 Relational Data Model (Source)
+
+The source system captures intricate enterprise activity across a multi-table relational schema containing customer registries, structural geographic vectors, nested sales orders, and product deep hierarchies.
+
+![Source Relational Data Model](dataModel/data_model.png)
+
+Key Entities Ingested:
+* `Customer` & `CustomerAddress` & `address` (Demographic and spatial dimensions)
+* `SalesOrderHeader` & `SalesOrderDetail` (Transactional operational cores)
+* `Product`, `ProductCategory`, `ProductModel`, and `ProductDescription` (Multi-tiered asset cataloging)
+
+---
+
+## ⚙️ Step-by-Step Pipeline Implementation
+
+### Phase 1: Secure Ingestion & Orchestration (ADF)
+1. **Dynamic Schema Discovering:** A parameterized `Lookup` activity queries the metadata repository of the database to fetch active table configurations.
+2. **Iterative Collection (`ForEach` Loop):** Iterates over the array of targeted system tables dynamically.
+3. **Optimized Multi-Threaded Copy:** The underlying `Copy Data` activity utilizes scalable throughput allocations to move raw tables safely into `.parquet` format within the **ADLS Gen2 Raw Landing Zone**.
+
+![ADF Orchestration Data Flow](Architecture/data_flow.png)
+
+### Phase 2: Multi-Stage Data Processing (Databricks Notebooks)
+* **Bronze Lakehouse Zone:** Ingests the landing parquet files directly into append-only Delta tables with minimal transformation, preserving historical schema structures.
+* **Silver Cleansing Zone:** PySpark scripts process records to handle Null structures, parse string anomalies, convert data types, and run deduplication scripts based on business keys.
+* **Gold Curated Zone:** Aggregates records, builds star schema entities, and structures final business metrics ready for executive analytical consumption.
+
+### Phase 3: Enterprise Data Warehousing (Synapse Analytics)
+* The system loads curated Gold metrics efficiently into **Azure Synapse Analytics Dedicated SQL Pools** using optimized distributed PolyBase or COPY statement methods.
+* Enforces primary/foreign constraint abstractions and indexing models (e.g., Clustered Columnstore) to supercharge query execution times for large datasets.
+
+### Phase 4: Business Intelligence & Analytics (Power BI)
+* Connects directly to Azure Synapse serverless/dedicated endpoints.
+* Constructs clean semantic layers utilizing DAX metrics for real-time calculations.
+* Deploys rich visuals highlighting demographic slices, seasonal category metrics, and operational performance indicators.
+
+---
+
+This project showcases an extensive cross-functional skillset tailored to meet the demands of both **Data Engineering** and **Data Analytics**:
+
+---
+
+## 📜 License
+This project is open-source and available under the [MIT License](LICENSE).
