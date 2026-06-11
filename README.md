@@ -49,6 +49,7 @@ This project bridges that gap by architecting a scalable **hybrid-cloud data eco
 
 * **Orchestration / Ingestion:** Azure Data Factory (ADF) utilizing self-hosted and cloud integration runtimes.
 * **Data Lakehouse Landing Zone:** Azure Data Lake Storage Gen2 (ADLS Gen2) structured with hierarchical namespaces.
+* **Unity Catalog:** Implemented Unity Catalog for centralized governance, storage credentials, external locations, and access control across Medallion architecture layers.
 * **Big Data Computation / Transformation:** Azure Databricks Spark clusters executing optimized Python/PySpark scripts.
 * **Enterprise Data Warehouse (EDW):** Azure Synapse Analytics utilizing dedicated Synapse SQL pools for serving curated gold schemas.
 * **Business Intelligence Reporting:** Power BI Desktop/Service executing DAX queries on imported/DirectQuery analytical models.
