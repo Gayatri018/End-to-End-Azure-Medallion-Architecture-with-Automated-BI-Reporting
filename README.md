@@ -18,7 +18,7 @@ An enterprise-grade, end-to-end cloud data pipeline and analytical solution buil
 - [📐 Data Platform & Solution Architecture](#-data-platform--solution-architecture)
 - [📂 Relational Data Model (Source)](#-relational-data-model-source)
 - [⚙️ Step-by-Step Pipeline Implementation](#️-step-by-step-implementation)
-  - [Phase 1: Secure Ingestion & Orchestration (ADF)](#phase-1-secure-ingestion--orchestration-adf)
+  - Phase 1: Secure Ingestion & Orchestration (ADF)
   - Phase 2: Multi-Stage Data Processing (Databricks Notebooks)
   - Phase 3: Enterprise Data Warehousing (Synapse Analytics)
   - Phase 4: Business Intelligence & Analytics (Power BI)
