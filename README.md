@@ -107,7 +107,7 @@ Key Entities Ingested:
 
 ---
 
-This project showcases an extensive cross-functional skillset tailored to meet the demands of both **Data Engineering** and **Data Analytics**:
+This project showcases an extensive cross-functional skillset tailored to meet the demands of both **Data Engineering** and **Data Analytics**
 
 ---
 
