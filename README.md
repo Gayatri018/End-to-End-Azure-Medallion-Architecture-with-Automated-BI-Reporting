@@ -22,15 +22,13 @@ An enterprise-grade, end-to-end cloud data pipeline and analytical solution buil
   - Phase 2: Multi-Stage Data Processing (Databricks Notebooks)
   - Phase 3: Enterprise Data Warehousing (Synapse Analytics)
   - Phase 4: Business Intelligence & Analytics (Power BI)
-- [⭐ Data Warehouse Design](#-star-schema-data-warehouse-design)
-- [💼 Dual-Role Impact: DE & DA Strengths](#-dual-role-impact-de--da-strengths)
 - [📜 License](#-license)
 
 ---
 
 ## 📌 Project Overview
 
-Organizations often face architectural siloing, resulting in a gap in understanding demographic behavior—specifically how traits like gender distribution correlate with regional and product category performance. 
+Organizations often face architectural issues, resulting in a gap in understanding demographic behavior—specifically how traits like gender distribution correlate with regional and product category performance. 
 
 This project bridges that gap by architecting a scalable **hybrid-cloud data ecosystem**. By extracting complex relational tables from an on-premises legacy environment into an automated Azure-native pipeline, raw data is systematically transformed into a robust dimensional model. The result is a unified platform satisfying both **Data Engineering (scalability, automation, governance)** and **Data Analytics (actionable KPIs, responsive reporting)** paradigms.
 
